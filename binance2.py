@@ -38,8 +38,6 @@ api_secret = "FsbKTSb7lCGLpQWoBad9Jobe8xpi177c2KrQ6Q31e86dUA5WgUqaliqHsILk7n5s"
 client = Client(api_key, api_secret)
 client.get_deposit_address(asset='USDT')
 
-cur_symbol = 'XMRUSDT'
-
 
 def Real():
     live = float(client.get_symbol_ticker(symbol = cur_symbol)['price']);
@@ -152,7 +150,7 @@ def evaluate_model(agent, price, window_size, debug):
         
         # SELL
         #The fix
-        elif ((action == 2 and len(agent.inventory) > 0 )) or (num_buys==buy_limit and len(agent.inventory) > 0):
+        elif action == 2 and len(agent.inventory) > 0 :
             bought_price = agent.inventory.pop(0)
             delta = price[t] - bought_price
             reward = delta #max(delta, 0)
